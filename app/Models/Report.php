@@ -15,7 +15,8 @@ class Report extends Model{
 
     // include module codes here
     protected $fillable = [
-        'CE1022','ME1032',
+        'CE1022','ME1032','CS1032',
+
 
     ];
 

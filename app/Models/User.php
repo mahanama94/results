@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 use App\Models\Report;
+use App\Models\UserData;
 
 class User extends Model implements AuthenticatableContract
 {
@@ -22,6 +23,8 @@ class User extends Model implements AuthenticatableContract
     protected $primaryKey = 'admNum';
     
     private $report = null;
+
+    private $userData = null;
 
     protected $table = 'results';
 
@@ -42,9 +45,27 @@ class User extends Model implements AuthenticatableContract
 
 
     /**
-     *
- *          GETTERS
-     *
+     *          RELATIONSHIPS
+     */
+
+    private function UserData(){
+        return $this->hasOne('App\Models\UserData', 'admNum', 'admNum');
+    }
+
+
+    /**
+     *          GETTERS RELATIONSHIP
+     */
+
+    private function getUserData(){
+        if($this->userData == null){
+            $this->userData = $this->UserData()->first();
+        }
+        return $this->userData;
+    }
+
+    /**
+     *          GETTERS
      */
 
     /*public function getId(){
@@ -52,7 +73,7 @@ class User extends Model implements AuthenticatableContract
     }
     */
     public function getIndexNumber(){
-        return $this->admNum;
+        return $this->getUserData()->getIndexNumber();
     }
 
     public function getName(){
@@ -61,13 +82,12 @@ class User extends Model implements AuthenticatableContract
         }
         return $this->name;
          */
-        return $this->getEmail();
+        return $this->getUserData()->getName();
     }
 
     public function getEmail(){
 
         return $this->getIndexNumber()."@uom.lk";
-            //return $this->email
 
     }
     

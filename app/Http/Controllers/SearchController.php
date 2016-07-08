@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\UserData;
 
 class SearchController  extends Controller{
 
@@ -15,11 +16,11 @@ class SearchController  extends Controller{
             return redirect()->route('home');
         }
 
-        //$usersName = User::where('name', 'LIKE', "%".$query."%")->get();
-        $usersIndex = User::where('admNum', 'LIKE', '%'.$query.'%')->get();
+        $usersName = UserData::where('name', 'LIKE', "%".$query."%")->get();
+        $users = User::where('admNum', 'LIKE', '%'.$query.'%')->get();
 
         //$users = $usersName->merge($usersIndex);
         
-        return view('search.results')->with('users', $usersIndex);
+        return view('search.results')->with('users', $users);
     }
 }
