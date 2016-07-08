@@ -32,7 +32,7 @@
 
                 @if(Auth::check())
                     <li>
-                        <a href="{{ route('list.index') }}">Full List</a>
+                        <a href="{{ route('list.index', ['type' => 'all'] ) }}">Full List</a>
                     </li>
                     <li><a href="{{ route('profile.index' , ['username' => Auth::User()->getIndexNumber()]) }}">
                             {{ Auth::user()->getName() }} (

@@ -85,7 +85,7 @@ Route::get('/module/{moduleCode}', [
  * List
  */
 
-Route::get('/list', [
+Route::get('/list/{type}', [
    'uses' => '\App\Http\Controllers\ResultController@index',
     'as' => 'list.index'
 ]);
